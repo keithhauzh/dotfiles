@@ -5,7 +5,7 @@ SAVEHIST=1000
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/keith/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 export PATH="$HOME/.local/share/bob/nvim-bin:$HOME/dev/android/Sdk/platform-tools:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 PROMPT='%n@%m:%~%# '
