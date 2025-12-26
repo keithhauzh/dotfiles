@@ -1,0 +1,4 @@
+#!/bin/sh
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:$HOME/.local/bin
+exec bemenu-run
+

@@ -1,0 +1,12 @@
+[general]
+import = [
+    # "~/.config/alacritty/themes/themes/ashes_dark.toml"
+    "~/.config/alacritty/themes/themes/afterglow.toml"
+]
+
+[window]
+padding = {x=10,y=10}
+
+[font]
+normal={family="Iosevka Term", style="Regular"}
+size=12
