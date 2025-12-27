@@ -1,0 +1,43 @@
+// -*- mode: jsonc -*-
+{
+	"layer": "top", // Waybar at top layer
+	// "position": "bottom", // Waybar position (top|bottom|left|right)
+	"height": 25, // Waybar height (to be removed for auto height)
+	// "width": 1280, // Waybar width
+	"spacing": 4, // Gaps between modules (4px)
+	// Choose the order of the modules
+	"modules-left": [
+		"hyprland/workspaces"
+	],
+	"modules-center": [],
+	"modules-right": [
+		"battery",
+		"clock"
+	],
+	"hyprland/workspaces": {
+		"format": "{icon}{name}",
+		"on-click": "activate",
+		"format-icons": {
+			"urgent": "!",
+			"active": ".",
+			"default": ""
+		},
+		"sort-by-number": true
+	},
+	"battery": {
+		"bat": "BAT1",
+		"interval": 60,
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon}{capacity}",
+		"format-charging": "^{capacity}",
+		"format-discharging": "v{capacity}",
+		"format-full": "-{capacity}",
+		"max-length": 25
+	},
+	"clock": {
+		"format-alt": "{:%a, %d. %b  %H:%M}"
+	}
+}
