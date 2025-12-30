@@ -1,19 +1,18 @@
 * {
 	font-family: "Iosevka Term";
-	font-size: "12px";
+	font-size: 15px;
 }
 
 window {
 	margin: 0px;
-	border: 1px solid #928374;
-	background-color: #282828;
+	border: 1px solid #7a7a7a;
+	background-color: #2b2b2b;
 }
 
 #input {
-	/* margin: 5px; */
 	border: none;
-	color: #ebdbb2;
-	background-color: #1d2021;
+	color: #d0d0d0;
+	background-color: #1f1f1f;
 	outline: none;
 }
 
@@ -23,16 +22,10 @@ window {
 	box-shadow: none;
 }
 
-#inner-box {
-	/* margin: 5px; */
-	border: none;
-	background-color: #282828;
-}
-
+#inner-box,
 #outer-box {
-	/* margin: 5px; */
 	border: none;
-	background-color: #282828;
+	background-color: #2b2b2b;
 }
 
 #scroll {
@@ -41,11 +34,22 @@ window {
 }
 
 #text {
-	/* margin: 5px; */
 	border: none;
-	color: #ebdbb2;
+	color: #d0d0d0;
 }
 
 #entry:selected {
-	background-color: #1d2021;
+	background-color: #1f1f1f;
 }
+
+/* remove icons */
+#img {
+	opacity: 0;
+	min-width: 0;
+}
+
+#input image {
+	opacity: 0;
+	min-width: 0;
+}
+

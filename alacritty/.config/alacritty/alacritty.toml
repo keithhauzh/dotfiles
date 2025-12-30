@@ -6,7 +6,7 @@ import = [
 
 [window]
 padding = {x=10,y=10}
-opacity=0.85
+# opacity=0.85
 
 [font]
 normal={family="Iosevka Term", style="Regular"}
