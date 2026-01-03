@@ -2,11 +2,12 @@ vim.o.termguicolors=true
 vim.cmd([[set noswapfile]])
 -- vim.o.guicursor = ""
 vim.o.tabstop=2
+vim.o.winborder="rounded"
 vim.o.shiftwidth=2
 vim.o.signcolumn="yes"
 vim.o.wrap=false
 vim.o.cursorcolumn=false
--- vim.o.cursorline=true
+vim.o.cursorline=true
 vim.o.ignorecase=true
 vim.o.smartindent=true
 vim.o.undofile=true
@@ -16,7 +17,6 @@ vim.g.mapleader = " "
 local map = vim.keymap.set
 map({ "n", "v", "x" }, ";", ":", { desc = "Self explanatory" })
 map({ "n", "v", "x" }, ":", ";", { desc = "Self explanatory" })
-map({ "n", "v", "x" }, "<leader>e", "<Cmd>:Explore<CR>")
 map({ "n" }, "<leader>w", "<Cmd>update<CR>", { desc = "Write the current buffer." })
 map({ "n" }, "<leader>q", "<Cmd>:quit<CR>", { desc = "Quit the current buffer." })
 map({ "n" }, "<leader>Q", "<Cmd>:wqa<CR>", { desc = "Quit all buffers and write." })

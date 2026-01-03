@@ -7,6 +7,6 @@ return {
 			theme = "taake",
 			transparent=true,
     }
-    require("black-metal").load()
+    -- require("black-metal").load()
   end,
 }

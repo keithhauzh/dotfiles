@@ -3,6 +3,7 @@ return {
 	config = function()
 		require 'mason-lspconfig'.setup {
 			ensure_installed = { "cssls",
+				"lua_ls",
 				"emmet_language_server",
 				"emmet_ls",
 				"jsonls",
