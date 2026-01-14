@@ -32,7 +32,7 @@
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-solarized-light)
 ;; (setq doom-theme 'doom-monokai-classic)
-(setq doom-theme 'doom-monokai-classic)
+(setq doom-theme 'doom-monolokai)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -206,3 +206,4 @@
 
 (setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
