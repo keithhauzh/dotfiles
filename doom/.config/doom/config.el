@@ -32,7 +32,7 @@
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-solarized-light)
 ;; (setq doom-theme 'doom-monokai-classic)
-(setq doom-theme 'doom-monokai-spectrum)
+(setq doom-theme 'doom-monokai-classic)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
