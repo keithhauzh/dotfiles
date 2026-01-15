@@ -1,85 +1,64 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+#+TITLE: Config
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
+* Table of Contents :toc:
+- [[#appearance][Appearance]]
+- [[#org][Org]]
+  - [[#org-folder][Org Folder]]
+  - [[#org-agenda][Org Agenda]]
+  - [[#org-settings][Org Settings]]
+- [[#flutter][Flutter]]
+- [[#keybinds][Keybinds]]
+- [[#dashboard][Dashboard]]
+  - [[#ascii-art-1][ascii art 1]]
+  - [[#ascii-art-2][ascii art 2]]
+  - [[#ascii-art-3][ascii art 3]]
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-symbol-font' -- for symbols
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;; (setq doom-theme 'doom-solarized-light)
-;; (setq doom-theme 'doom-monokai-classic)
-(setq doom-theme 'doom-monolokai)
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
+* Appearance
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-manegarm)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
 (setq display-line-numbers-type 'relative)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org")
-
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
 (blink-cursor-mode 1)
+#+end_src
 
+* Org
+** Org Folder
+#+begin_src emacs-lisp
+(setq org-directory "~/org")
+#+end_src
+
+** Org Agenda
+#+begin_src emacs-lisp
+(after! org
+  (setq org-agenda-files "~/org/agenda.org"))
+#+end_src
+
+** Org Settings
+#+begin_src emacs-lisp
+;; (custom-theme-set-faces!
+;;     'doom-monokai-spectrum'
+;;     '(org-level-8 :inherit outline-3 :height 1.0)
+;;     '(org-level-7 :inherit outline-3 :height 1.0)
+;;     '(org-level-6 :inherit outline-3 :height 1.1)
+;;     '(org-level-5 :inherit outline-3 :height 1.2)
+;;     '(org-level-4 :inherit outline-3 :height 1.3)
+;;     '(org-level-3 :inherit outline-3 :height 1.4)
+;;     '(org-level-2 :inherit outline-2 :height 1.5)
+;;     '(org-level-1 :inherit outline-1 :height 1.6)
+;;     '(org-document-title :height 1.8 :bold t :underline nil)
+;; )
+#+end_src
+
+* Flutter
+#+begin_src emacs-lisp
 (setenv "PATH" (concat "/opt/flutter-sdk/bin:" (getenv "PATH")))
 (add-to-list 'exec-path "/opt/flutter-sdk/bin")
 
 (setq lsp-dart-sdk-dir "/opt/flutter-sdk/bin/cache/dart-sdk")
+#+end_src
 
+* Keybinds
+#+begin_src emacs-lisp
 (map! :leader
       :desc "save buffer"
       "e w" #'save-buffer
@@ -88,7 +67,15 @@
       :desc "Format buffer"
       "e f" #'+format/buffer
       )
+#+end_src
 
+* Dashboard
+#+begin_src emacs-lisp
+(setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater)
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+#+end_src
+** ascii art 1
+#+begin_src emacs-lisp
 ;; (defun my-weebery-is-always-greater ()
 ;;   (let* ((banner '("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⢿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠛⣩⣭⣭⣭⣭⣭⣭⣭⣝⣛⡻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"
 ;;                    "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠙⢻⣿⠿⣛⡭⠂⠀⠀⠀⣿⣿⣿⣿⣿⣫⣭⡍⠛⣛⣛⡳⠦⣭⡛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"
@@ -165,35 +152,76 @@
 ;;                 (concat line (make-string (max 0 (- longest-line (length line))) 32)))
 ;;                "\n"))
 ;;      'face 'doom-dashboard-banner)))
+#+end_src
+** ascii art 2
+#+begin_src emacs-lisp
+;; (defun my-weebery-is-always-greater ()
+;;   (let* ((banner '("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⢀⡀⠀⠀⣀⠠⣄⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠐⠈⢄⣾⡽⠶⢗⡮⢺⣄⣚⠋⠥⡈⠓⠶⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠀⢀⢈⡶⠋⠁⠀⢐⠮⢷⠬⣿⡒⢔⠒⢦⡉⠣⡊⠘⢦⣀⣤⣶⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢃⢶⣤⣤⣤⡔⡅⣀⠎⣱⠋⠀⠀⠀⠀⠀⠀⠀⠀⠉⢃⠀⠂⠀⠙⣆⠈⠒⠢⠹⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠜⢿⣿⣿⣿⣦⠎⡼⠁⠀⠀⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢦⠀⠈⠢⡀⢻⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠜⣿⣿⣿⣏⡾⠁⠀⠀⠀⢀⡏⠀⠀⠀⡄⠀⠀⠀⠀⠄⠀⠀⡀⠀⢷⠀⠀⠸⣌⢿⣿⠎⢢⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠈⣻⣿⠏⢤⠁⠀⣀⠄⠀⣸⠀⠀⢠⠀⣇⠀⠀⠀⠀⠘⡀⠘⢷⠀⠈⣧⠀⠀⢹⡅⢡⠀⠀⠣⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠌⠀⠀⠉⠁⣼⢂⣡⠞⠁⠀⢠⣇⠀⠀⢸⠀⣿⠀⠀⠀⠀⠀⢻⠀⠸⡀⠀⢸⡞⡀⠈⣓⡄⢣⠀⠀⠑⡀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠸⠀⢰⣵⠹⠁⠀⠀⢀⢟⠁⠀⠀⣿⠀⣿⠀⠀⠀⠀⠀⢸⠀⠀⡇⠀⠀⣿⠀⠀⢁⣿⣿⣷⡀⠀⠑⡀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⡘⠀⠀⢀⢆⣰⣿⣿⠃⠀⠀⠀⢈⢸⠀⠀⢰⠻⠀⣽⠀⠀⠀⠀⠀⢨⠀⠀⡇⢸⡀⡸⢣⠠⢊⢿⣿⣿⣿⣆⠀⢐⡀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠐⠀⠀⣠⠾⠚⡻⢿⡿⠀⠀⠀⠀⡆⣾⠀⠀⡚⡀⢸⢡⡆⠀⠀⠀⠀⠸⠀⢠⢷⠀⢇⠘⢇⠣⢃⢸⣿⠟⣍⡉⠘⢅⠰⡀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⢀⣡⣴⠁⡿⠀⠒⠀⠰⠁⠀⠀⠀⢠⢁⢷⠀⣸⠃⡧⡦⢤⣠⠀⠀⠀⠀⠘⠀⣿⠿⠤⡿⣆⠎⣄⠇⠀⠘⢇⠳⡈⠫⢔⡕⢵⡀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⢠⣾⣿⡏⠰⡄⠀⠀⣇⠃⠀⠀⠀⠀⡆⠸⣸⣄⣃⣠⣷⡀⠀⠈⠈⣰⠀⠀⠀⢠⢋⠀⢂⣱⣛⣶⠘⠄⠀⢂⠈⢂⢡⠀⠀⠈⠑⠃⠀⠀"
+;;                    "⠀⠀⠀⠀⣴⣿⣿⢿⠁⢼⠃⡄⢠⠇⡀⠀⠀⠀⢀⠀⢸⠋⢻⣹⠿⣿⢿⠛⠻⡇⢻⡄⠀⠀⡼⣿⣿⡿⢿⢿⢹⠀⠈⢂⠁⢂⠀⠀⢆⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠠⠾⠟⠋⠁⠀⢰⣿⠀⠃⠟⠀⢹⠀⠀⠀⠸⠀⢸⠤⢂⢈⣄⠁⡙⠀⠀⢱⡆⠘⡄⢠⢃⣥⣦⣃⡹⠃⣾⠇⠀⡟⣄⠀⡷⣦⠘⡄⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⣠⠊⠛⡄⣲⣸⠀⡞⠀⠀⠀⡎⢸⡇⣇⠨⡉⡎⠉⠒⠀⠀⠈⠀⠀⠘⠆⢁⠊⠐⠉⢹⢰⠇⡆⠀⣗⠘⡦⡇⠈⠑⢼⣄⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡆⢸⢤⣿⡀⠀⢰⢣⡄⢀⢹⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⢗⠀⠃⡀⣿⡅⢧⡟⢅⠀⠀⠈⢠⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⣀⣬⣴⣿⣷⠀⣿⣿⣿⢻⢰⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣞⠏⣦⢀⡇⣾⢺⣦⠃⠀⠀⠀⠀⠀⠂⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠄⢶⣶⣾⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿⡎⢺⣻⣗⢄⡀⠀⠀⠀⠀⠉⠉⠁⠀⠀⢀⣴⣋⣬⣾⣯⣾⢠⣿⣿⣦⣄⣀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠉⠘⠉⠦⣀⠉⠉⠉⠛⠻⢿⣧⣿⣿⣿⡇⣿⡟⣿⠀⠻⠢⣄⡀⠀⠀⠀⠀⣠⠴⣿⣿⣿⣿⣿⣿⣿⣼⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠓⣄⡀⠀⠀⠀⢸⠛⠉⠙⢿⣿⢷⠘⠙⡰⠑⣨⠟⠷⣦⣤⢾⣿⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠛⠓⠛⠂⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡋⠂⢠⣀⡄⠀⠀⠀⠈⡿⠸⡀⠀⠈⠐⢺⠉⢳⡖⠈⠉⠀⠀⢸⣿⣿⡿⠿⠿⠿⠿⢿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⣀⣌⣤⣶⣿⣿⣿⣆⠀⠀⠀⢣⠢⠉⠦⣄⠀⡁⠈⣼⠃⠀⠀⠠⢐⠄⡏⠁⠀⠀⠀⣠⣾⣿⣷⣦⣤⡀⠀⠀⠀⠀⠀⠀⠀"
+;;                    "⠀⠀⠀⠀⡀⠀⣢⠜⠂⠉⠉⠉⠉⠻⠿⢿⣿⣿⠢⠀⠀⠈⢃⠈⠢⠀⠸⣗⡄⣸⡀⠀⡠⠊⠀⢠⠃⠀⠀⢀⢾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠀⠀⠀"
+;;                    "⠀⠔⠈⣀⡰⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⠑⠑⢜⠀⡀⠀⠑⠟⣾⠿⣶⣶⣿⣷⠒⠂⠄⠠⡏⠀⠀⠔⢁⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣦⠀"
+;;                    "⠀⢀⣾⣶⣦⣤⣤⣶⣤⣤⣄⣀⡀⢀⡐⣡⠎⠠⠀⡀⠑⠬⠢⠀⠜⣡⡾⣯⣷⣿⢦⣂⠠⢒⣬⠀⠤⠂⠈⠀⠀⢛⣿⣿⣿⣿⣿⣿⣿⡿⡛⣸⣵⣿⣧"
+;;                    "⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⡼⠁⠀⠀⠀⠀⠁⠂⠀⡠⢮⠏⣸⢻⣟⣇⠴⡛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢞⣿⣿⣿⣿⣿⡏⣑⣽⣿⣿⣿⣿"
+;;                    "⣰⣿⣿⢫⣿⣿⣿⣿⣿⣿⣿⢏⣠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠺⢴⣁⣤⢿⣼⢿⣏⣢⣬⠞⡢⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"))
+;;          (longest-line (apply #'max (mapcar #'length banner))))
+;;     (put-text-property
+;;      (point)
+;;      (dolist (line banner (point))
+;;        (insert (+doom-dashboard--center
+;;                 +doom-dashboard--width
+;;                 (concat line (make-string (max 0 (- longest-line (length line))) 32)))
+;;                "\n"))
+;;      'face 'doom-dashboard-banner)))
+#+end_src
+** ascii art 3
+#+begin_src emacs-lisp
 (defun my-weebery-is-always-greater ()
-  (let* ((banner '("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⢀⡀⠀⠀⣀⠠⣄⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠐⠈⢄⣾⡽⠶⢗⡮⢺⣄⣚⠋⠥⡈⠓⠶⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠀⢀⢈⡶⠋⠁⠀⢐⠮⢷⠬⣿⡒⢔⠒⢦⡉⠣⡊⠘⢦⣀⣤⣶⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢃⢶⣤⣤⣤⡔⡅⣀⠎⣱⠋⠀⠀⠀⠀⠀⠀⠀⠀⠉⢃⠀⠂⠀⠙⣆⠈⠒⠢⠹⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠜⢿⣿⣿⣿⣦⠎⡼⠁⠀⠀⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢦⠀⠈⠢⡀⢻⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠜⣿⣿⣿⣏⡾⠁⠀⠀⠀⢀⡏⠀⠀⠀⡄⠀⠀⠀⠀⠄⠀⠀⡀⠀⢷⠀⠀⠸⣌⢿⣿⠎⢢⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠈⣻⣿⠏⢤⠁⠀⣀⠄⠀⣸⠀⠀⢠⠀⣇⠀⠀⠀⠀⠘⡀⠘⢷⠀⠈⣧⠀⠀⢹⡅⢡⠀⠀⠣⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠌⠀⠀⠉⠁⣼⢂⣡⠞⠁⠀⢠⣇⠀⠀⢸⠀⣿⠀⠀⠀⠀⠀⢻⠀⠸⡀⠀⢸⡞⡀⠈⣓⡄⢣⠀⠀⠑⡀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠸⠀⢰⣵⠹⠁⠀⠀⢀⢟⠁⠀⠀⣿⠀⣿⠀⠀⠀⠀⠀⢸⠀⠀⡇⠀⠀⣿⠀⠀⢁⣿⣿⣷⡀⠀⠑⡀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⡘⠀⠀⢀⢆⣰⣿⣿⠃⠀⠀⠀⢈⢸⠀⠀⢰⠻⠀⣽⠀⠀⠀⠀⠀⢨⠀⠀⡇⢸⡀⡸⢣⠠⢊⢿⣿⣿⣿⣆⠀⢐⡀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠐⠀⠀⣠⠾⠚⡻⢿⡿⠀⠀⠀⠀⡆⣾⠀⠀⡚⡀⢸⢡⡆⠀⠀⠀⠀⠸⠀⢠⢷⠀⢇⠘⢇⠣⢃⢸⣿⠟⣍⡉⠘⢅⠰⡀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⢀⣡⣴⠁⡿⠀⠒⠀⠰⠁⠀⠀⠀⢠⢁⢷⠀⣸⠃⡧⡦⢤⣠⠀⠀⠀⠀⠘⠀⣿⠿⠤⡿⣆⠎⣄⠇⠀⠘⢇⠳⡈⠫⢔⡕⢵⡀⠀⠀"
-                   "⠀⠀⠀⠀⠀⢠⣾⣿⡏⠰⡄⠀⠀⣇⠃⠀⠀⠀⠀⡆⠸⣸⣄⣃⣠⣷⡀⠀⠈⠈⣰⠀⠀⠀⢠⢋⠀⢂⣱⣛⣶⠘⠄⠀⢂⠈⢂⢡⠀⠀⠈⠑⠃⠀⠀"
-                   "⠀⠀⠀⠀⣴⣿⣿⢿⠁⢼⠃⡄⢠⠇⡀⠀⠀⠀⢀⠀⢸⠋⢻⣹⠿⣿⢿⠛⠻⡇⢻⡄⠀⠀⡼⣿⣿⡿⢿⢿⢹⠀⠈⢂⠁⢂⠀⠀⢆⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠠⠾⠟⠋⠁⠀⢰⣿⠀⠃⠟⠀⢹⠀⠀⠀⠸⠀⢸⠤⢂⢈⣄⠁⡙⠀⠀⢱⡆⠘⡄⢠⢃⣥⣦⣃⡹⠃⣾⠇⠀⡟⣄⠀⡷⣦⠘⡄⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⣠⠊⠛⡄⣲⣸⠀⡞⠀⠀⠀⡎⢸⡇⣇⠨⡉⡎⠉⠒⠀⠀⠈⠀⠀⠘⠆⢁⠊⠐⠉⢹⢰⠇⡆⠀⣗⠘⡦⡇⠈⠑⢼⣄⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡆⢸⢤⣿⡀⠀⢰⢣⡄⢀⢹⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⢗⠀⠃⡀⣿⡅⢧⡟⢅⠀⠀⠈⢠⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⣀⣬⣴⣿⣷⠀⣿⣿⣿⢻⢰⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣞⠏⣦⢀⡇⣾⢺⣦⠃⠀⠀⠀⠀⠀⠂⠀⠀"
-                   "⠀⠀⠀⠀⠀⠄⢶⣶⣾⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿⡎⢺⣻⣗⢄⡀⠀⠀⠀⠀⠉⠉⠁⠀⠀⢀⣴⣋⣬⣾⣯⣾⢠⣿⣿⣦⣄⣀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠉⠘⠉⠦⣀⠉⠉⠉⠛⠻⢿⣧⣿⣿⣿⡇⣿⡟⣿⠀⠻⠢⣄⡀⠀⠀⠀⠀⣠⠴⣿⣿⣿⣿⣿⣿⣿⣼⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠓⣄⡀⠀⠀⠀⢸⠛⠉⠙⢿⣿⢷⠘⠙⡰⠑⣨⠟⠷⣦⣤⢾⣿⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠛⠓⠛⠂⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡋⠂⢠⣀⡄⠀⠀⠀⠈⡿⠸⡀⠀⠈⠐⢺⠉⢳⡖⠈⠉⠀⠀⢸⣿⣿⡿⠿⠿⠿⠿⢿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⣀⣌⣤⣶⣿⣿⣿⣆⠀⠀⠀⢣⠢⠉⠦⣄⠀⡁⠈⣼⠃⠀⠀⠠⢐⠄⡏⠁⠀⠀⠀⣠⣾⣿⣷⣦⣤⡀⠀⠀⠀⠀⠀⠀⠀"
-                   "⠀⠀⠀⠀⡀⠀⣢⠜⠂⠉⠉⠉⠉⠻⠿⢿⣿⣿⠢⠀⠀⠈⢃⠈⠢⠀⠸⣗⡄⣸⡀⠀⡠⠊⠀⢠⠃⠀⠀⢀⢾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠀⠀⠀"
-                   "⠀⠔⠈⣀⡰⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⠑⠑⢜⠀⡀⠀⠑⠟⣾⠿⣶⣶⣿⣷⠒⠂⠄⠠⡏⠀⠀⠔⢁⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣦⠀"
-                   "⠀⢀⣾⣶⣦⣤⣤⣶⣤⣤⣄⣀⡀⢀⡐⣡⠎⠠⠀⡀⠑⠬⠢⠀⠜⣡⡾⣯⣷⣿⢦⣂⠠⢒⣬⠀⠤⠂⠈⠀⠀⢛⣿⣿⣿⣿⣿⣿⣿⡿⡛⣸⣵⣿⣧"
-                   "⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⡼⠁⠀⠀⠀⠀⠁⠂⠀⡠⢮⠏⣸⢻⣟⣇⠴⡛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢞⣿⣿⣿⣿⣿⡏⣑⣽⣿⣿⣿⣿"
-                   "⣰⣿⣿⢫⣿⣿⣿⣿⣿⣿⣿⢏⣠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠺⢴⣁⣤⢿⣼⢿⣏⣢⣬⠞⡢⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"))
+  (let* ((banner '("⠀⡀⠞⠁⢀⣤⠞⠉⢁⣤⠞⠋⠁⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⣠⠏⠀⠀⠀⠀⠀⠈⠀⠀⠈⢧⠈⠻⣿⢶⣬⣳⡀⠀⠈⢦⡀⠀⠀⠀"
+                   "⣾⣁⣀⣤⠟⣡⠴⠚⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠋⠀⠀⡴⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠇⠀⠘⢆⠻⣆⣧⠀⠀⠀⠻⣤⣤⡄"
+                   "⠋⢀⣸⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡜⠁⠀⢀⡞⠁⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢆⠘⣿⣇⠀⠀⠀⠹⣿⠇"
+                   "⠟⠉⣀⣠⣤⠴⠀⠀⠀⠀⢀⠖⠀⠀⠀⠀⣠⠊⠀⠀⣠⠏⠀⠀⠀⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠂⠈⣿⡀⠀⠀⠀⢸⠀"
+                   "⠚⢿⣿⡿⠋⠀⠀⠀⠀⣠⠋⠀⠀⠀⠀⠀⠁⠀⠀⡴⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠀⠀⢾⠀"
+                   "⣠⣿⡟⠁⠀⠀⠀⢀⡜⠁⠀⠀⠀⠀⠀⠀⠀⢀⡾⠃⠀⠀⠀⠀⡖⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡆⠀⠀⠀⠇⠀⠙⡆⠀⠀⢸⠀"
+                   "⣿⠏⠀⠀⠀⠀⠀⠊⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠀⡆⠀⠀⠀⠸⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣧⠀⠀⠀⢡⠀⠀⢿⡀⠀⠈⡆"
+                   "⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠟⠀⢰⠇⠀⠀⠀⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⣿⡄⠀⠀⢸⠀⠀⠀⢧⠀⠀⡅"
+                   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⡟⠀⠀⡏⢀⡀⠀⣸⠀⢀⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⡘⠇⠀⠀⢘⠀⠀⠀⠸⡄⠀⣇"
+                   "⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⠀⠀⢀⡾⡇⡇⠀⢰⠃⢻⡏⠉⡏⠉⠉⢯⠈⢹⡀⠀⠀⠀⠀⠀⠀⢸⡇⠀⡇⢸⠀⠀⡄⠀⠀⠀⠀⢣⠀⢨"
+                   "⠀⠀⠀⠀⠀⠀⢰⠃⠀⠀⠀⢠⠏⠀⡇⠡⠀⡎⠀⠈⣿⠐⠁⠀⠀⠸⡀⠘⡇⠀⠀⠀⠀⠀⠀⢸⡇⢀⡟⢺⠶⢤⡇⠀⠀⠀⠀⠘⡀⠈"
+                   "⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⣰⠋⠀⠀⣧⠘⣼⣦⣤⣶⣾⣶⣦⣔⡢⠄⡇⡀⢹⠀⠀⠀⠀⠀⠀⡏⣷⣸⠀⠀⠁⢸⡏⢹⠀⠀⠀⠀⠁⠀"
+                   "⠀⠀⠀⠀⠀⣰⡇⠀⠀⡴⠁⠀⠃⢲⠿⣔⠻⣿⡿⢿⠿⣛⠛⠿⢷⣄⢸⡇⠀⡆⠀⠀⠀⣼⢸⣷⣿⣇⣀⡀⠀⠀⡇⢸⠀⠀⠀⠀⠀⠀"
+                   "⠀⠀⠀⠀⢠⢿⠀⢀⡞⠀⠀⠀⡿⢸⠀⠁⠀⠙⠒⠒⠒⠛⠃⠀⠀⠀⠀⠃⠀⢹⠀⠀⡼⢹⡿⣿⡿⠿⠿⠿⣿⣅⡇⡘⠀⢠⠃⠀⠀⠀"
+                   "⠀⠀⠀⢠⡏⡼⢀⡞⠀⠀⠀⠀⡇⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢇⡜⠁⠈⠉⠒⠒⠛⠀⠀⠚⣻⣗⠇⢠⡏⠀⠀⠀⠀"
+                   "⠀⠀⢀⣿⠀⡇⡼⠀⠀⠀⠀⠀⡇⠸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⢹⡿⢠⣯⡇⠀⠀⠀⡄"
+                   "⠀⠀⡼⢸⢤⣷⢧⠀⢸⠀⠀⠀⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠁⡞⢠⠋⡼⣧⠀⠀⠀⠃"
+                   "⠀⢰⠃⡼⣾⠃⣼⡆⠀⡇⠀⠀⣿⡷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠇⣼⡁⠀⠀⡇⣿⠀⠀⢸⡀"
+                   "⠀⡏⢰⣷⠸⠀⢿⣷⡀⢱⠀⠀⣿⠁⠘⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣤⡄⠀⠀⠀⠀⠀⠀⠀⣠⣿⢠⣇⣧⠀⠀⠀⢿⠀⠀⢼⠉"
+                   "⠸⠁⣾⠸⣿⠀⠸⣿⣇⠘⡄⠀⣿⠀⠀⠀⠑⢄⡀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠋⠀⠀⠀⠀⠀⠀⣠⢾⣷⠇⣼⠀⢿⡆⠀⠘⠘⠀⠀⢰⣶"
+                   "⠀⠀⠉⢧⠹⣷⡀⢿⢿⡄⢡⠀⡿⠀⠀⠀⠀⠀⠈⠢⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣿⡇⣾⡿⡼⠉⢧⠘⣧⠀⡇⠀⠀⠀⠙⠿"
+                   "⠀⠀⠀⠈⠳⡘⠿⢾⠀⠹⡈⠀⠃⠀⠀⠀⠀⠀⠀⠀⠈⠳⢦⣄⡀⠀⠀⠀⣠⡴⠚⠉⠀⠀⠙⠒⢸⡷⠁⠀⠘⡆⢸⡰⢷⡖⠂⠀⣷⣶"
+                   "⠀⠀⠀⠀⠀⠈⠓⢀⣡⡴⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⣷⠚⠉⣇⠘⢾⣦⠀⠀⠀⠀⠀⢣⠀⠀⢰⠇⣸⠃⠈⣗⠚⣳⣾⣽"
+                   "⠀⠀⠀⣠⠞⠛⠓⠫⣙⢿⣦⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠘⢆⡀⠑⠤⠀⠀⠀⠀⠀⠃⠀⠜⠣⣏⠀⠀⢻⠀⠀⠀⠀"
+                   "⠚⠉⠉⠉⠉⠒⢤⣀⠀⠑⣽⣷⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀⠀⠀⢉⣲⠂⢤⣄⡀⠀⠀⠀⠀⠀⠀⠘⣷⣄⣸⠀⠀⠀⠀"))
          (longest-line (apply #'max (mapcar #'length banner))))
     (put-text-property
      (point)
@@ -203,7 +231,7 @@
                 (concat line (make-string (max 0 (- longest-line (length line))) 32)))
                "\n"))
      'face 'doom-dashboard-banner)))
+#+end_src
 
-(setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater)
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-(add-to-list 'default-frame-alist '(alpha-background . 85))
+
+
