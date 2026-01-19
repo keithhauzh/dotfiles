@@ -2,6 +2,10 @@
 
 * Table of Contents :toc:
 - [[#appearance][Appearance]]
+  - [[#theme][Theme]]
+  - [[#transparent-background][Transparent Background]]
+  - [[#relative-line-numbers][Relative line numbers]]
+  - [[#cursor][Cursor]]
 - [[#org][Org]]
   - [[#org-folder][Org Folder]]
   - [[#org-agenda][Org Agenda]]
@@ -14,13 +18,42 @@
   - [[#ascii-art-3][ascii art 3]]
 
 * Appearance
+** Theme
 #+begin_src emacs-lisp
 (setq doom-theme 'doom-manegarm)
-(add-to-list 'default-frame-alist '(alpha-background . 85))
+#+end_src
+** Transparent Background
+#+begin_src emacs-lisp
+;; (add-to-list 'default-frame-alist '(alpha-background . 85))
+#+end_src
+** Relative line numbers
+#+begin_src emacs-lisp
 (setq display-line-numbers-type 'relative)
+;; this makes it so relative line numbers will always show up
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (when (and (not (minibufferp))
+                       (not display-line-numbers-mode))
+              (display-line-numbers-mode 1)))
+          100)
+#+end_src
+** Cursor
+*** Blinking Cursor
+#+begin_src emacs-lisp
 (blink-cursor-mode 1)
 #+end_src
-
+*** Uniform cursor in evil mode regardless or state
+#+begin_src emacs-lisp
+(after! evil
+  (setq evil-insert-state-cursor 'box
+        evil-normal-state-cursor 'box
+        evil-visual-state-cursor 'box
+        evil-replace-state-cursor 'box
+        evil-motion-state-cursor 'box
+        evil-emacs-state-cursor 'box
+      )
+)
+#+end_src
 * Org
 ** Org Folder
 #+begin_src emacs-lisp

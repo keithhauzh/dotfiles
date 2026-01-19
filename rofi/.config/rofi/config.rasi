@@ -1,6 +1,7 @@
+@theme "/usr/share/rofi/themes/dmenu.rasi"
 configuration {
 /*	modes: "window,drun,run,ssh";*/
-	font: "FiraCode Nerd Font 15";
+	font: "FiraMono Nerd Font 20";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -13,7 +14,7 @@ configuration {
 /*	on-menu-canceled: ;*/
 /*	on-menu-error: ;*/
 /*	on-screenshot-taken: ;*/
-/*	terminal: "rofi-sensible-terminal";*/
+	terminal: "alacritty";
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/
@@ -166,3 +167,4 @@ configuration {
       sorting-method:    "name";
   }
 }
+

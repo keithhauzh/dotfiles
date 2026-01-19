@@ -1,19 +1,4 @@
-[general]
-import = [
-    # "~/.config/alacritty/themes/themes/ashes_dark.toml"
-    # "~/.config/alacritty/themes/themes/afterglow.toml"
-    # "~/.config/alacritty/themes/themes/dark_pride.toml"
-    # "~/.config/alacritty/themes/themes/seashells.toml"
-    # "~/.config/alacritty/themes/themes/xterm.toml"
-    # "~/.config/alacritty/themes/themes/solarized_dark.toml"
-    "~/.config/alacritty/themes/themes/rainbow.toml"
-]
-
-[window]
-# padding = {x=10,y=10}
-opacity=0.85
-
 [font]
-# normal={family="IosevkaTerm Nerd Font", style="Regular"}
 normal={family="FiraMono Nerd Font", style="Regular"}
 size=12
+
