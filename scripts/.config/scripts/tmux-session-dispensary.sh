@@ -1,11 +1,11 @@
 #!/bin/bash
 
 DIRS=(
-    "$HOME/dev/android/AndroidStudioProjects"
-    "$HOME/dev/svelte"
-    "$HOME/dev/react"
-    "$HOME/.config"	
-		"$HOME/dotfiles"
+	"$HOME/develop/flutter_projects"
+	"$HOME/develop/python"
+	"$HOME/develop/suckless"
+	"$HOME/.config"	
+	"$HOME/dotfiles"
 )
 
 if [[ $# -eq 1 ]]; then
