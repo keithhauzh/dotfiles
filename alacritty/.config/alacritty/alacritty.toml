@@ -2,35 +2,37 @@
 normal={family="FiraCode Nerd Font Mono", style="Regular"}
 size=12
 
-# Default colors
+# Dark Pride
+# A dark trans pride colour inspired theme
+
+# Primary colors
 [colors.primary]
-background = '#292C3E'
-foreground = '#EBEBEB'
+background = '#0d0d1b'
+foreground = '#ccccce'
 
-# Cursor colors
+# Colors used for 'custom_cursor_colors'
 [colors.cursor]
-text = '#EBEBEB'
-cursor = '#FF261E'
+text = '#bbbbbb'
+cursor = '#ff0017'
 
-# Normal colors
+# Colors 0 through 7
 [colors.normal]
-black   = '#0d0d0d'
-red     = '#FF301B'
-green   = '#A0E521'
-yellow  = '#FFC620'
-blue    = '#1BA6FA'
-magenta = '#8763B8'
-cyan    = '#21DEEF'
-white   = '#EBEBEB'
+black = '#282828'
+red = '#ca1444'
+green = '#789aba'
+yellow = '#b3879f'
+blue = '#95569b'
+magenta = '#cb6fa1'
+cyan = '#fb6e93'
+white = '#cf98c1'
 
-# Bright colors
+# Colors 8 through 15
 [colors.bright]
-black   = '#6D7070'
-red     = '#FF4352'
-green   = '#B8E466'
-yellow  = '#FFD750'
-blue    = '#1BA6FA'
-magenta = '#A578EA'
-cyan    = '#73FBF1'
-white   = '#FEFEF8'
-
+black = '#98218e'
+red = '#cb515d'
+green = '#5a87b1'
+yellow = '#9c61ab'
+blue = '#9a77b1'
+magenta = '#f2a297'
+cyan = '#f4436f'
+white = '#ebdbb2'

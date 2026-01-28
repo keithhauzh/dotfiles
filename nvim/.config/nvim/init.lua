@@ -24,19 +24,22 @@ vim.g.maplocalleader = "\\"
 -- KEYBINDS
 vim.o.termguicolors = true
 vim.cmd([[set noswapfile]])
--- vim.o.guicursor = ""
--- vim.o.tabstop = 2
+-- vim.cmd("colorscheme blue")
+vim.o.guicursor = ""
+vim.o.tabstop = 2
 vim.o.winborder = "rounded"
+-- vim.o.winborder = "none"
 vim.o.shiftwidth = 2
 vim.o.signcolumn = "yes"
 vim.o.wrap = false
-vim.o.cursorcolumn = false
+-- vim.o.cursorcolumn = true
 vim.o.cursorline = true
 vim.o.ignorecase = true
 vim.o.smartindent = true
 vim.o.undofile = true
 vim.o.number = true
 vim.o.relativenumber = true
+
 vim.g.mapleader = " "
 local map = vim.keymap.set
 map({ "n" }, "<leader>w", "<Cmd>update<CR>", { desc = "Write the current buffer." })
@@ -44,12 +47,20 @@ map({ "n" }, "<leader>W", "<Cmd>update<CR>", { desc = "Write all buffers." })
 map({ "n" }, "<leader>q", "<Cmd>:quit<CR>", { desc = "Quit the current buffer." })
 map({ "n" }, "<leader>Q", "<Cmd>:wqa<CR>", { desc = "Quit all buffers and write." })
 map({ "n", "x" }, "<leader>y", '"+y')
+
+-- LSP KEYBINDS
 map({ "n", "v", "x" }, "<leader>lf", vim.lsp.buf.format, { desc = "Format current buffer" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 map("v", "<leader>bf", vim.lsp.buf.references, { desc = "References" })
-
+map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show Diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next)
+map("n", "[d", vim.diagnostic.goto_prev)
+map("n", "<leader>D", function()
+	vim.diagnostic.setqflist()
+	vim.cmd("copen")
+end, { desc = "Fill up quick fix list with LSP diagnostics" })
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
@@ -61,18 +72,27 @@ require("lazy").setup({
 			priority = 1000,
 			config = function()
 				require 'black-metal'.setup {
-					theme = "taake",
-					-- alt_bg = true,
+					-- theme = "bathory",
+					-- theme = "windir",
+					-- theme = "dark-funeral",
+					theme = "khold",
+					-- plain_float = true,
+					-- cursorline_gutter = true,
+					highlights = {
+						-- Without this, cursorline is invisible
+						["CursorLine"] = { bg = "#1f1f1f" }, -- pick a visible background color
+					},
 				}
-				-- require("black-metal").load()
+				require("black-metal").load()
 			end,
 		},
-		{"rose-pine/neovim", 
-		name = "rose-pine",
-		config = function()
-		  vim.cmd("colorscheme rose-pine")
-		end,
-	      },
+		{
+			"rose-pine/neovim",
+			name = "rose-pine",
+			-- config = function()
+			-- 	vim.cmd("colorscheme rose-pine")
+			-- end,
+		},
 		{
 			'saghen/blink.cmp',
 			-- optional: provides snippets for the snippet source
@@ -141,6 +161,19 @@ require("lazy").setup({
 			config = function()
 				require 'lualine'.setup()
 			end,
+		},
+		{
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v3.x",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"MunifTanjim/nui.nvim",
+				"nvim-tree/nvim-web-devicons", -- optional, but recommended
+			},
+			config = function()
+				map("n", "<leader>t", "<Cmd>:Neotree filesystem reveal right<CR>")
+			end,
+			lazy = false, -- neo-tree will lazily load itself		
 		},
 		{
 			"https://github.com/norcalli/nvim-colorizer.lua",
