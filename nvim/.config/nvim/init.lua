@@ -61,6 +61,8 @@ map("n", "<leader>D", function()
 	vim.diagnostic.setqflist()
 	vim.cmd("copen")
 end, { desc = "Fill up quick fix list with LSP diagnostics" })
+map("n", "<leader>bd", "<Cmd>:bd<CR>", { desc = "Delete buffer for current file" })
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
@@ -152,6 +154,9 @@ require("lazy").setup({
 			dependencies = 'nvim-tree/nvim-web-devicons',
 			config = function()
 				require 'bufferline'.setup()
+
+				map("n", "<C-h>", "<Cmd>BufferLineCyclePrev<CR>", { silent = true })
+				map("n", "<C-l>", "<Cmd>BufferLineCycleNext<CR>", { silent = true })
 			end,
 			opts = {}
 		},
